@@ -16,6 +16,9 @@ DESCRIPTION : This Python code is used to convert speech in an audio file into t
 
 First, we import speech_recognition as sr and AudioSegment from pydub. These libraries serve different purposes in the process. The pydub library is mainly used to handle and process different audio formats. Since the SpeechRecognition library works best with WAV files (especially mono-channel and 16kHz sample rate), we use `pyd_
 
+OUTPUT: 
+Transcription:
+hi friends my name is gaurav srivastava and I am from Class 8 today I'm in front of you all with a special topic that is the full form of artificial intelligence and artificial means make means man-made and it's not natural and intelligence made means that the capability to think and take decision so it was discovered in 1950 and now it is artificial intelligence is very important it is useful for so many books and jobs now it is it is so many advantages and disadvantages but I would like to say that you shouldn't because it's time to make you a bit of anything from your phone you're not trying to do it yourself something
 
 
 
