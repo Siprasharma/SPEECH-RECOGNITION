@@ -1,0 +1,52 @@
+pip install SpeechRecognition pydub
+
+import speech_recognition as sr
+from pydub import AudioSegment
+
+def transcribe_audio(audio_path):
+  """
+  Transcribes audio from a given file path using the SpeechRecognition library.
+
+  Args:
+    audio_path (str): The path to the audio file.
+
+  Returns:
+    str: The transcribed text, or None if transcription fails.
+  """
+  r = sr.Recognizer()
+
+  # Convert audio to a format supported by SpeechRecognition if necessary
+  try:
+      audio = AudioSegment.from_file(audio_path)
+      # You might need to adjust sample rate and channels depending on the audio file
+      audio = audio.set_frame_rate(16000).set_channels(1)
+      audio.export("temp.wav", format="wav")
+      audio_path_for_recognition = "temp.wav"
+  except Exception as e:
+      print(f"Error converting audio file: {e}")
+      return None
+
+
+  with sr.AudioFile(audio_path_for_recognition) as source:
+      # read the entire audio file
+      audio_data = r.record(source)
+
+  # recognize speech using Google Web Speech API
+  try:
+      text = r.recognize_google(audio_data)
+      return text
+  except sr.UnknownValueError:
+      print("Google Web Speech API could not understand audio")
+      return None
+  except sr.RequestError as e:
+      print(f"Could not request results from Google Web Speech API service; {e}")
+      return None
+
+audio_file_path = '/content/audio 2.wav'  # Your audio file path
+transcribed_text = transcribe_audio(audio_file_path)
+
+if transcribed_text:
+  print("Transcription:")
+  print(transcribed_text)
+else:
+  print("Transcription failed.")
